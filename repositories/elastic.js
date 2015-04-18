@@ -1,3 +1,11 @@
-/**
- * Created by michal.jezierski on 18.04.15.
- */
+'use strict';
+
+var client = require('elasticsearch').Client({
+  host: 'localhost:9200'
+});
+
+module.exports = {
+  get: function (index) {
+    return new Promise(function () {});
+  }
+};
