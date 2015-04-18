@@ -1,6 +1,7 @@
 {
   "name": "sweter-dashboard",
   "version": "0.1.0",
+  "repository": "msn0/sweter-dashboard",
   "scripts": {
     "start": "node ./bin/www"
   },
