@@ -5,7 +5,10 @@ var client = require('elasticsearch').Client({
 });
 
 module.exports = {
-  get: function (index) {
-    return new Promise(function () {});
+  get: function (index, range) {
+    return client.search({
+      index: index,
+      q: 'timestamp:['+range.left+'+TO+'+range.right+']'
+    });
   }
 };
