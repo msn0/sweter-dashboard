@@ -10,7 +10,7 @@ function getTimeRange() {
   return {
     left: left,
     right: right
-  }
+  };
 }
 
 module.exports = {
