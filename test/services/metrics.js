@@ -7,7 +7,9 @@ var tk = require('timekeeper');
 describe("Metrics service", function () {
   beforeEach(function () {
     this.repository = {
-      get: function () {}
+      get: function () {
+        return Promise.resolve();
+      }
     };
     this.service = service;
     this.service.__set__("repository", this.repository);

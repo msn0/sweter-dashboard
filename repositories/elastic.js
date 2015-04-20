@@ -8,7 +8,17 @@ module.exports = {
   get: function (index, range) {
     return client.search({
       index: index,
-      q: 'timestamp:['+range.left+'+TO+'+range.right+']'
+      body: {
+        size: 10000,
+        query: {
+          range: {
+            timestamp: {
+              gte: range.left,
+              lte: range.right
+            }
+          }
+        }
+      }
     });
   }
 };

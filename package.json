@@ -26,6 +26,7 @@
     "debug": "~2.1.1",
     "elasticsearch": "^4.0.2",
     "express": "~4.12.2",
+    "fast-stats": "0.0.2",
     "hbs": "~2.9.0",
     "jshint": "^2.7.0",
     "less-middleware": "1.0.x",

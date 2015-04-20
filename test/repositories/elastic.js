@@ -17,7 +17,17 @@ describe("Elastic repository", function () {
     this.repository.get("index", { left: 1, right: 2});
     assert(spy.calledWith({
       index: "index",
-      q: "timestamp:[1+TO+2]"
+      body: {
+        size: 10000,
+        query: {
+          range: {
+            timestamp: {
+              gte: 1,
+              lte: 2
+            }
+          }
+        }
+      }
     }));
   });
 });
