@@ -11,10 +11,12 @@
 </div>
 
 <script>
-  fetch("/metrics").then(function (data) {
-    data.json().then(function (d) {
-      document.querySelector(".metric-median .metric-value").innerHTML = d.metrics.median;
-      document.querySelector(".metric-p95 .metric-value").innerHTML = d.metrics.p95;
+  fetch("/metrics")
+    .then(function (data) {
+      return data.json()
+    })
+    .then(function (data) {
+      document.querySelector(".metric-median .metric-value").innerHTML = data.metrics.median;
+      document.querySelector(".metric-p95 .metric-value").innerHTML = data.metrics.p95;
     });
-  });
 </script>
