@@ -3,15 +3,12 @@
 var repository = require('../repositories/elastic');
 
 function getTimeRange() {
-  var right, left = new Date();
-  left.setHours(0);
-  left.setMinutes(0);
-  left.setSeconds(0);
-  left.setMilliseconds(0);
-  right = left.getTime() + (24 * 3600000 - 1);
+  var left, right, current = new Date();
+  left = new Date(current.getTime() - (current.getTime() % (24 * 3600000))).getTime();
+  right = left + (24 * 3600000 - 1);
 
   return {
-    left: left.getTime(),
+    left: left,
     right: right
   }
 }

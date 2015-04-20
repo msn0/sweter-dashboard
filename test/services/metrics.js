@@ -21,11 +21,14 @@ describe("Metrics service", function () {
 
   it("should get metrics from expected time range", function () {
     var spy = sinon.spy(this.repository, 'get');
-    tk.freeze(new Date(1444888000000)); // Thu, 15 Oct 2015 07:46:40 GMT+2
+    tk.freeze(new Date(1444888000000)); // Thu, 15 Oct 2015 05:46:40 GMT
+
     this.service.get("index");
+
     assert(spy.calledWith("index", {
-      left: 1444860000000, // Thu, 15 Oct 2015 00:00:00 GMT+2
-      right: 1444946399999 // Thu, 15 Oct 2015 23:59:59 GMT+2
+      left: 1444867200000, // Thu, 15 Oct 2015 00:00:00 GMT
+      right: 1444953599999 // Thu, 15 Oct 2015 23:59:59 GMT
     }));
+    tk.reset();
   });
 });
