@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var rewire = require('rewire');
-var service = rewire('../../services/metrics');
+var service = rewire('../../lib/services/metrics');
 var tk = require('timekeeper');
 
 describe("Metrics service", function () {

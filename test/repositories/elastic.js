@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
 var rewire = require('rewire');
-var repository = rewire('../../repositories/elastic');
+var repository = rewire('../../lib/repositories/elastic');
 
 describe("Elastic repository", function () {
   beforeEach(function () {

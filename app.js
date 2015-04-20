@@ -4,8 +4,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./controllers/index');
-var metrics = require('./controllers/metrics');
+var index = require('./lib/controllers/index');
+var metrics = require('./lib/controllers/metrics');
 
 var app = express();
 
