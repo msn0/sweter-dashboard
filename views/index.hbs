@@ -1,2 +1,20 @@
-<h1>Sweter Dashboard</h1>
-<p>LOL</p>
+<p class="metric-name">domInteractive</p>
+
+<div class="metric metric-median">
+  <div class="metric-heading">median</div>
+  <div class="metric-value"></div>
+</div>
+
+<div class="metric metric-p95">
+  <div class="metric-heading">p95</div>
+  <div class="metric-value"></div>
+</div>
+
+<script>
+  fetch("/metrics").then(function (data) {
+    data.json().then(function (d) {
+      document.querySelector(".metric-median .metric-value").innerHTML = d.metrics.median;
+      document.querySelector(".metric-p95 .metric-value").innerHTML = d.metrics.p95;
+    });
+  });
+</script>
