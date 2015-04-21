@@ -4,7 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 
 var index = require('./lib/controllers/index');
-var metrics = require('./lib/controllers/metrics');
+var api = require('./lib/controllers/api');
 
 var app = express();
 
@@ -18,7 +18,7 @@ app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/metrics', metrics);
+app.use('/api', api);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
