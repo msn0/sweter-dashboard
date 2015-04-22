@@ -4,7 +4,7 @@
 <script type="text/x-handlebars-template" id="indices-template">
   <div class="panel panel-default">
     <div class="panel-heading">
-      ElasticSearch indices
+      Performance indices
     </div>
     <div class="panel-body">
       <table class="table">
@@ -17,7 +17,7 @@
         <tbody>
         \{{#each indices}}
         <tr>
-          <td>\{{index}}</td>
+          <td><a href="#" class="index-link" data-index="\{{index}}">\{{index}}</a></td>
           <td>\{{docs}}</td>
         </tr>
         \{{/each}}
@@ -39,6 +39,7 @@
 
   function showMetrics(data) {
     var key, template = Handlebars.compile($('#box-template').html());
+    $(".box-wrapper").html("");
     for (key in data.metrics) {
       $(".box-wrapper").append(template({
         value: data.metrics[key],
@@ -59,11 +60,17 @@
     $(".indices-wrapper").html(template(model));
   }
 
-  fetch("/api/metrics")
-    .then(function (data) {
-      return data.json()
-    })
-    .then(showMetrics);
+  function fetchMetrics() {
+    var index = $(this).attr("data-index");
+    fetch("/api/metrics/" + index)
+      .then(function (data) {
+        return data.json()
+      })
+      .then(showMetrics);
+    return false;
+  }
+
+  $(".indices-wrapper").on("click", ".index-link", fetchMetrics);
 
   fetch("/api/indices")
     .then(function (data) {
