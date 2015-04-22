@@ -1,22 +1,74 @@
-<div class="box box-median">
-  <div class="box-metric">domInteractive</div>
-  <div class="box-value"></div>
-  <div class="box-measure">median</div>
-</div>
+<div class="indices-wrapper"></div>
+<div class="box-wrapper"></div>
 
-<div class="box box-p95">
-  <div class="box-metric">domInteractive</div>
-  <div class="box-value"></div>
-  <div class="box-measure">p95</div>
-</div>
+<script type="text/x-handlebars-template" id="indices-template">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      ElasticSearch indices
+    </div>
+    <div class="panel-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>index</th>
+          <th># measurements</th>
+        </tr>
+        </thead>
+        <tbody>
+        \{{#each indices}}
+        <tr>
+          <td>\{{index}}</td>
+          <td>\{{docs}}</td>
+        </tr>
+        \{{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</script>
+
+<script type="text/x-handlebars-template" id="box-template">
+  <div class="box box-median">
+    <div class="box-metric">domInteractive</div>
+    <div class="box-value">\{{value}}</div>
+    <div class="box-measure">\{{name}}</div>
+  </div>
+</script>
 
 <script>
+
+  function showMetrics(data) {
+    var key, template = Handlebars.compile($('#box-template').html());
+    for (key in data.metrics) {
+      $(".box-wrapper").append(template({
+        value: data.metrics[key],
+        name: key
+      }));
+    }
+  }
+
+  function showIndices(data) {
+    var model = {indices: []}, key,
+      template = Handlebars.compile($('#indices-template').html());
+    for (var key in data.indices) {
+      model.indices.push({
+        index: key,
+        docs: data.indices[key].docs.num_docs
+      });
+    }
+    $(".indices-wrapper").html(template(model));
+  }
+
   fetch("/api/metrics")
     .then(function (data) {
       return data.json()
     })
+    .then(showMetrics);
+
+  fetch("/api/indices")
     .then(function (data) {
-      document.querySelector(".box-median .box-value").innerHTML = data.metrics.median;
-      document.querySelector(".box-p95 .box-value").innerHTML = data.metrics.p95;
-    });
+      return data.json()
+    })
+    .then(showIndices);
+
 </script>

@@ -10,13 +10,21 @@ a {
 }
 
 .box {
-  background: #556b8d; //#677fa4
-  width: 36%;
+  background: #556b8d;
   color: white;
-  float: left;
-  margin: 0 7%;
   text-align: center;
+  flex-basis: 200px;
+  margin: 0 10px;
 }
+
+.box:first-child {
+  margin-left: 0;
+}
+
+.box:last-child {
+  margin-right: 0;
+}
+
 .box-metric {
   letter-spacing: 0.1em;
   border-top-right-radius: 1px;
@@ -40,9 +48,6 @@ a {
   text-shadow: 0 1px 1px #333366;
 }
 
-@media (min-width: 600px) {
-  .box {
-    width: 200px;
-    margin: 0 20px
-  }
+.box-wrapper {
+  display: flex;
 }
