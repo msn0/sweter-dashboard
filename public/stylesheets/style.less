@@ -56,3 +56,37 @@ a {
   display: flex;
   margin: 20px 0;
 }
+
+.spinner {
+  animation: spin 1.2s infinite linear;
+  -webkit-animation: spin 1.2s infinite linear;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #eee;
+  border-top-color: #555;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  position: relative;
+  vertical-align: middle;
+  width: 20px;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
