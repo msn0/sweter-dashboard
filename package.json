@@ -35,6 +35,7 @@
     "sinon": "^1.14.1",
     "stats-median": "^1.0.0",
     "stats-percentile": "^1.0.1",
+    "stats-variance": "^1.0.0",
     "timekeeper": "0.0.5"
   }
 }

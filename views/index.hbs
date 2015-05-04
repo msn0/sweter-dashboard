@@ -1,30 +1,44 @@
-<div class="indices-wrapper"></div>
+<div id="indices" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Performance indices</h4>
+      </div>
+      <div class="modal-body">
+        <div class="indices-wrapper"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-pills">
+  <li role="presentation">
+    <a href="#indices" role="button" data-toggle="modal">Indices</a>
+  </li>
+</ul>
+
 <div class="box-wrapper"></div>
 
 <script type="text/x-handlebars-template" id="indices-template">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Performance indices
-    </div>
-    <div class="panel-body">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>index</th>
-          <th># measurements</th>
-        </tr>
-        </thead>
-        <tbody>
-        \{{#each indices}}
-        <tr>
-          <td><a href="#" class="index-link" data-index="\{{index}}">\{{index}}</a></td>
-          <td>\{{docs}}</td>
-        </tr>
-        \{{/each}}
-        </tbody>
-      </table>
-    </div>
-  </div>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>index</th>
+      <th># measurements</th>
+    </tr>
+    </thead>
+    <tbody>
+    \{{#each indices}}
+    <tr>
+      <td>
+        <a href="#" class="index-link" data-dismiss="modal" data-target="#indices" data-index="\{{index}}">\{{index}}</a>
+      </td>
+      <td>\{{docs}}</td>
+    </tr>
+    \{{/each}}
+    </tbody>
+  </table>
+
 </script>
 
 <script type="text/x-handlebars-template" id="box-template">
@@ -51,13 +65,18 @@
   function showIndices(data) {
     var model = {indices: []}, key,
       template = Handlebars.compile($('#indices-template').html());
-    for (var key in data.indices) {
+    for (key in data.indices) {
       model.indices.push({
         index: key,
         docs: data.indices[key].docs.num_docs
       });
     }
     $(".indices-wrapper").html(template(model));
+  }
+
+  function dismiss() {
+    var target = $(this).attr("data-target");
+    $(target).modal('hide');
   }
 
   function fetchMetrics() {
@@ -70,12 +89,18 @@
     return false;
   }
 
-  $(".indices-wrapper").on("click", ".index-link", fetchMetrics);
+  function fetchIndices() {
+    fetch("/api/indices")
+      .then(function (data) {
+        return data.json()
+      })
+      .then(showIndices);
+    return false;
+  }
 
-  fetch("/api/indices")
-    .then(function (data) {
-      return data.json()
-    })
-    .then(showIndices);
+  $(".indices-wrapper").on("click", ".index-link", fetchMetrics);
+  $(".indices-wrapper").on("click", "[data-dismiss=modal]", dismiss);
+
+  fetchIndices();
 
 </script>
