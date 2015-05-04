@@ -27,15 +27,17 @@
     "elasticsearch": "^4.0.2",
     "express": "~4.12.2",
     "hbs": "~2.9.0",
-    "jshint": "^2.7.0",
     "less-middleware": "1.0.x",
-    "mocha": "^2.2.4",
     "morgan": "~1.5.1",
-    "rewire": "^2.3.1",
-    "sinon": "^1.14.1",
     "stats-median": "^1.0.0",
     "stats-percentile": "^1.0.1",
-    "stats-variance": "^1.0.0",
+    "stats-variance": "^1.0.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.4",
+    "rewire": "^2.3.1",
+    "sinon": "^1.14.1",
     "timekeeper": "0.0.5"
   }
 }
