@@ -56,9 +56,9 @@
   function showMetrics(data) {
     var key, template = Handlebars.compile($('#box-template').html());
     $(".box-wrapper").html("");
-    for (key in data.metrics) {
+    for (key in data[0].metrics) {
       $(".box-wrapper").append(template({
-        value: data.metrics[key],
+        value: data[0].metrics[key],
         name: key
       }));
     }
@@ -83,7 +83,7 @@
 
   function fetchMetrics() {
     var index = $(this).attr("data-index");
-    fetch("/api/metrics/" + index)
+    fetch("/api/metrics/" + index + "?last=1")
       .then(function (data) {
         return data.json()
       })
