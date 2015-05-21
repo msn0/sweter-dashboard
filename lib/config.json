@@ -1,6 +1,6 @@
 {
   "elasticsearch": {
-    "host": "fenek-sweter-dashboard1.allegro-offersup-prod.pl-poz.dc5.alledc.net",
+    "host": "localhost",
     "port": "9200"
   }
 }
